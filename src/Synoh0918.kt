@@ -1,0 +1,3 @@
+class Synoh0918 {
+
+}
