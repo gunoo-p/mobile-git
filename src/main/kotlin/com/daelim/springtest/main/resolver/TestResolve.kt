@@ -23,6 +23,12 @@ class PostResolver {
         return tests.find { it.id == id }
     }
 
+    @QueryMapping // 스키마의 Query { findTestById(id: String) }와 매핑
+    fun findTestByTel(@Argument tel: String): TestDto? { // 파라미터는 @Argument 필수
+        return tests.find { it.tel == tel }
+    }
+
+
     @MutationMapping // 스키마의 Mutation { createTest(userId: String) }와 매핑
     fun createTest(@Argument userId: String): TestDto {
         val test = TestDto(
@@ -30,7 +36,7 @@ class PostResolver {
             address = faker.address().fullAddress(),
             email = faker.internet().emailAddress(),
             tel = faker.phoneNumber().phoneNumber(),
-            age = Random().nextInt(100)
+            age = Random().nextInt(100),
         )
         tests.add(test)
         return test
